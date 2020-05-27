@@ -1002,14 +1002,17 @@ class Group_LDAP extends BackendUtility implements \OCP\GroupInterface, IGroupLD
 	}
 
 	/**
-	 * get a list of all groups
+	 * get a list of all groups using a paged search
 	 *
 	 * @param string $search
-	 * @param $limit
+	 * @param int $limit
 	 * @param int $offset
 	 * @return array with group names
 	 *
-	 * Returns a list with all groups (used by getGroups)
+	 * Returns a list with all groups
+	 * Uses a paged search if available to override a
+	 * server side search limit.
+	 * (active directory has a limit of 1000 by default)
 	 */
 	protected function getGroupsChunk($search = '', $limit = -1, $offset = 0) {
 		if(!$this->enabled) {
